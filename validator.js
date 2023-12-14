@@ -1,14 +1,9 @@
 /* mô tả: Cảnh báo khi nhập sai thông tin vào các ô
-Khi blue ra ngoài mà chưa hoàn thiện thông tin
+Khi blur ra ngoài mà chưa hoàn thiện thông tin
 */
-
-
-// function chính
 function Validator(options) {
     // tạo object để lưu các rule
-
     var selectorRule = {} ;
-
     //get parent element
     function getParentElement(element, selector) {
         while (element.parentElement) {
@@ -18,13 +13,10 @@ function Validator(options) {
             element = element.parentElement;
         }
     }
-
-    function validate(inputElement, rule) {
-        // lấy được value người dùng đang nhập vào
-        // lấy được test 
+    // hàm thực hiện in ra lỗi hoặc bỏ lỗi
+    function validate(inputElement, rule) { 
         var errorMessage;
         var errorElement = getParentElement(inputElement, options.formGroupSelector).querySelector(options.errorSelector);
-        // parentsElement dùng để chọn ra ngoài phần tử cha
 
         var rules = selectorRule[rule.selector];
         // lặp qua từng rule để kiểm tra
@@ -61,8 +53,7 @@ function Validator(options) {
         formElement.onsubmit = function(e) {
             e.preventDefault();
             var isFormValid = true;
-            // validate toàn bộ input khi nhan submit
-
+            // validate toàn bộ input khi nhận submit
             options.rules.forEach(function (rule) {
                 var inputElement = formElement.querySelector(rule.selector);
                 var isValid = validate(inputElement, rule);
@@ -70,7 +61,6 @@ function Validator(options) {
                     isFormValid = false;
                 }
             });
-
 
             if (isFormValid) {
                 //TH submit với JS
@@ -131,33 +121,25 @@ function Validator(options) {
                 }
             }
         })
-
     }
-
 }
-
 // phương thức thực hiện check name
 Validator.isRequired = function(selector, message) {
     return {
-        selector: selector,
-        // test dùng để check 
-        // truyền value vào để xem người dùng có nhập thông tin chưa
+        selector: selector, 
+        // Khi có lỗi trả ra message lỗi, không lỗi trả vể undefined
         test: function(value) {   
-            // undefine khi không lỗi, lỗi trả về message
             return value ? undefined : message || 'Vui lòng nhập thông tin'
             // trim() loại bỏ dấu cách đầu hoặc cuối hoặc toàn dấu cách 
         }
     }
 }
 // phương thức thực hiện check email
-
 Validator.isEmail = function(selector, message) {
     return {
         selector: selector,
-        // test dùng để check 
-        // truyền value vào để xem người dùng có nhập thông tin chưa
+        // Khi có lỗi trả ra message lỗi, không lỗi trả vể undefined
         test: function(value) {   
-            // undefine khi không lỗi, lỗi trả về message
             var regex = /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/;
             return regex.test(value) ? undefined : message || 'Trường này phải là email'
             // trim() loại bỏ dấu cách đầu hoặc cuối hoặc toàn dấu cách 
@@ -176,8 +158,6 @@ Validator.minLength = function(selector, min, message) {
 }
 
 // chức năng check password trùng nhau
-// truyền tham số password để check với password vừa nhập ở trên
-// tham số massage để custom message
 Validator.isConfirm = function (selector, password, message) {
     return {
         selector: selector,

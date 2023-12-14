@@ -9,20 +9,18 @@
 <body>
     <div class="main">
         <form action="" method="post" class="form" id="form-1">
-            <h3>Thành viên đăng ký</h3>
-            <p class="description">Cùng nhau học lập trình miễn phí tại F8 ❤️</p>
-
+            <h3>Đăng ký thành viên</h3>
             <div class="spacer"></div>
             
             <div class="form-group">
                 <label for="full-name" class="form-label">Tên đầy đủ</label>    <!-- label for input with personal ID-->
-                    <input id="full-name" name="full-name" rules="required" class="form-control" type="text" placeholder="VD: Ninh Lê">
+                <input id="full-name" name="full-name" rules="required" class="form-control" type="text" placeholder="Vd: Nguyễn Văn A">
                 <span class="form-message"></span>                              <!-- dùng thẻ span-->
             </div>
 
             <div class="form-group">
                 <label for="email" class="form-label">Email</label>
-                <input id="email" name="email" class="form-control" rules="required|email" type="email" placeholder="VD: anninh1511@gmail.com">
+                <input id="email" name="email" class="form-control" rules="required|email" type="email" placeholder="Vd: email@gmail.com">
                 <span class="form-message"></span>
             </div>
 
@@ -44,22 +42,6 @@
                     <option value="HN">Hà Nội</option>
                     <option value="HCM">TP. HCM</option>
                 </select>   
-                <span class="form-message"></span>
-            </div>
-            <div class="form-group">
-                <label for="gender" class="form-label">Gender</label>
-                <div>
-                    <input name="gender" value="Male" class="form-control" type="checkbox">
-                    Male
-                </div>
-                <div>
-                    <input name="gender" value="Female" class="form-control" type="checkbox">
-                    Female
-                </div>
-                <div>
-                    <input name="gender" value="Khác" class="form-control" type="checkbox">
-                    Other
-                </div>
                 <span class="form-message"></span>
             </div>
             <button class="form-submit">Đăng ký</button>
@@ -85,7 +67,7 @@
                 Validator.isRequired('#province'),
                 Validator.isRequired('input[name="gender"]'),
            ],
-           // in ra thông tin sau khi nhập
+           // in ra thông tin sau submit
             onSubmit: function(data) {
                 console.log(data)
             }
